@@ -1,0 +1,10 @@
+#include "mystack.h"
+#include <iostream>
+using namespace std;
+
+int main () {
+  MyStack<int> s;
+  
+
+
+}
