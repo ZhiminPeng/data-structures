@@ -76,25 +76,23 @@ void minHeap::push(int val) {
   }
 }
 
+// heapfy the heap where curr.leftChild and curr.rightChild are heap
 void minHeap::heapfy(int curr) {
   
-  while (true) {
-    int smaller_child = INT_MIN;
-    if (leftChild(curr) != -1 && cache_[leftChild(curr)] < cache_[curr]) {
-      smaller_child = leftChild(curr);
-      swap(cache_[curr], cache_[smaller_child]);
-    }
-    if (rightChild(curr) != - 1 && cache_[rightChild(curr)] < cache_[curr]) {
-      smaller_child = rightChild(curr);
-      swap(cache_[curr], cache_[smaller_child]);
-    }
-
-    if (smaller_child != INT_MIN) {
-      curr = smaller_child;
-    } else {
-      break;
-    }
+  int smaller_child = INT_MIN;
+  int left = leftChild(curr);
+  int right = rightChild(curr);
+  if (left != -1 && cache_[curr] > cache_[left]) {
+    smaller_child = left;
   }
+  if (right != -1 && cache_[smaller_child] > cache_[right]) {
+    smaller_child = right;
+  }
+  if (smaller_child != INT_MIN) {
+    swap(cache_[smaller_child], cache_[curr]);
+    heapfy(smaller_child);
+  }
+  return;
 }
 
 void minHeap::pop() {
@@ -135,20 +133,20 @@ minHeap::minHeap(int val) {
 
 
 int main() {
-  int val = 0;
-  minHeap mh(val);
-  mh.push(1);
-  mh.push(2);
-  mh.print();
-  mh.push(-1);
-  mh.print();
-  mh.pop();
-  mh.print();
-  mh.pop();
-  mh.print();
 
-  vector<int> v = {4, 3, 2, 1, 0};
-  minHeap m(v);
+
+  // vector<int> v = {4, 3, 2, 1, 0};
+  //  minHeap m(v);
+  minHeap m;
+  m.push(0);
+  m.push(4);
+  m.push(1);
+  m.push(5);
+  m.push(6);  
+  m.push(2);
+  m.push(7);    
+  m.print();
+  m.pop();
   m.print();
   return 0;
 }
